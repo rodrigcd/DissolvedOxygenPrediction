@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isfile, join
 
 
-class DissolvedOxigenDatabase(object):
+class DissolvedOxygenDatabase(object):
 
     def __init__(self, **kwargs):
         self.database_path = kwargs["database_path"]
