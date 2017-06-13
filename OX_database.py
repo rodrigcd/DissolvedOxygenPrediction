@@ -72,7 +72,7 @@ if __name__ == "__main__":
     sequence_size = 3
     train_prop = 0.7
 
-    database = DissolvedOxigenDatabase(database_path=path,
+    database = DissolvedOxygenDatabase(database_path=path,
                                        sequence_size=3,
                                        train_prop=train_prop)
 
