@@ -20,6 +20,21 @@ class LstmLayer(object):
             self.output_tensor, self.state = self.lstm(self.input_tensor, self.state)
 
 
+class RecurrentLayer(object):
+    """Classic Recurrent Layer"""
+    def __init__(self, input_tensor, hidden_units, time_steps, layer_name):
+
+        self.input_tensor = input_tensor
+        self.time_steps = time_steps
+        self.layer_name = layer_name
+        self.hidden_units = hidden_units
+
+        with tf.variable_scope(layer_name):
+            self.recurrent_layer = tf.nn.rnn_cell.BasicRNNCell(hidden_units)
+            self.state = self.recurrent_layer.zero_state(input_tensor.get_shape()[0], dtype='float32')
+            self.output_tensor, self.state = self.lstm(self.input_tensor, self.state)
+
+
 class FullyConnectedLayer(object):
     """fully connected layer"""
     def __init__(self, input_tensor, weights_shape, layer_name):
@@ -38,7 +53,7 @@ class FullyConnectedLayer(object):
 
 
 class ForecastingNetwork(object):
-    """Convolutional neural network"""
+    """ForecastingNetwork neural network"""
 
     def __init__(self, **kwargs):
         # TODO: Get performance and stuffs
@@ -62,10 +77,10 @@ class ForecastingNetwork(object):
         self.target = tf.placeholder(tf.float32)
         self.keep_prob = tf.placeholder(tf.float32)
 
-        self.lstm_layer_1 = LstmLayer(input_tensor=self.model_input,
-                                     hidden_units=5,
-                                     time_steps=5,
-                                     layer_name="lstm_layer1")
+        self.lstm_layer_1 = RecurrentLayer(input_tensor=self.model_input,
+                                           hidden_units=5,
+                                           time_steps=5,
+                                           layer_name="lstm_layer1")
 
         self.fc_layer_2 = FullyConnectedLayer(input_tensor=self.lstm_layer_1.output_tensor,
                                              weights_shape=[5, 1],

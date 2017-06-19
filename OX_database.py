@@ -151,7 +151,8 @@ class DissolvedOxygenDatabase(object):
 
         return batch, target, days
 
-    #def test_batch(self):
+    def sequence_batch(self, set="train"):
+        return
 
 
 if __name__ == "__main__":
