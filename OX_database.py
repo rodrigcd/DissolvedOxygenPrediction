@@ -14,6 +14,7 @@ class DissolvedOxygenDatabase(object):
         self.train_prop = kwargs["train_prop"]
 
         self.start_batch_index = 0
+        self.data_transformation = {}
         self.read_database()
         self.gen_train_test_set()
         self.n_train = len(self.train_data["pH"]["days"])
@@ -56,6 +57,7 @@ class DissolvedOxygenDatabase(object):
                             continue
                         data_array.append(np.array(data_row, dtype="float32")[np.newaxis, :])
                 data_array = np.concatenate(data_array, axis=0)
+                self.data_transformation[feature_file] = [np.nanmean(data_array), np.nanstd(data_array)]
                 normalized_values = (data_array - np.nanmean(data_array))/np.nanstd(data_array)
                 self.data[feature_file] = {"date": date_array,
                                            "values": data_array,
@@ -98,42 +100,58 @@ class DissolvedOxygenDatabase(object):
         plt.xlabel("Days", fontsize=14)
         plt.savefig("database.png")
 
-    def next_batch(self, batch_size=50, feature_list=["pH", "Temperature", "River_Discharge"]):
+    def next_batch(self, batch_size=50, feature_list=["pH", "Temperature", "River_Discharge"], set="train"):
         """Get train batch"""
+        if set == "test":
+            data = self.test_data
+            batch_size = "all"
+            n_data = self.n_test
+        else:
+            data = self.train_data
+            n_data = self.n_train
         batch = []
         target = []  # Only DO
+        days = []
         reset = False
         start_index = self.start_batch_index
         if batch_size == "all":
             start_index = 0
-            end_index = self.n_train - 1
+            end_index = n_data - 1
         else:
             end_index = self.start_batch_index + batch_size
 
-        if end_index >= self.n_train:
-            end_index = self.n_train - 1
+        if end_index >= n_data:
+            end_index = n_data - 1
             self.start_batch_index = 0
 
         for index in np.arange(start_index, end_index):
             row = []
             for feature in feature_list:
-                row.append(self.train_data[feature]["normalized_values"][index, 0])
+                row.append(data[feature]["normalized_values"][index, -1])
             row = np.array(row)[np.newaxis, :]
-            D0_target = self.train_data["Dissolved_Oxygen"]["normalized_values"][index, 0]
+            D0_target = data["Dissolved_Oxygen"]["normalized_values"][index, -1]
+            day = data["Dissolved_Oxygen"]["days"][index]
             if (np.sum(np.isnan(row)) > 0) or (np.isnan(D0_target)):
                 continue
             batch.append(row)
             target.append(D0_target)
+            days.append(day)
+
+        batch = np.concatenate(batch, axis=0)
+        target = np.array(target)
+        days = np.array(days)
+
+        if batch_size == "all":
+            return batch, target, days
 
         if reset:
             self.start_batch_index = 0
         else:
             self.start_batch_index += batch_size
 
-        batch = np.concatenate(batch, axis=0)
-        target = np.array(target)
-        return batch, target
+        return batch, target, days
 
+    #def test_batch(self):
 
 
 if __name__ == "__main__":
@@ -165,7 +183,7 @@ if __name__ == "__main__":
     for key in database.data_features:
        print("test data shape in " + key + " :" + str(database.test_data[key]["values"].shape))
 
-    for i in range(50):
-        batch, target = database.next_batch()
+    for i in range(20):
+        batch, target, days = database.next_batch(batch_size=50, set="train")
         print("batch_shape: "+str(batch.shape))
         print("target_shape:"+str(target.shape))
