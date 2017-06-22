@@ -12,6 +12,7 @@ class DissolvedOxygenDatabase(object):
         self.database_path = kwargs["database_path"]
         self.sequence_size = kwargs["sequence_size"]
         self.train_prop = kwargs["train_prop"]
+        self.sequence_batch_size = kwargs["sequence_batch_size"]
 
         self.start_batch_index = 0
         self.data_transformation = {}
@@ -151,8 +152,25 @@ class DissolvedOxygenDatabase(object):
 
         return batch, target, days
 
-    def sequence_batch(self, set="train"):
-        return
+    def data2sequences(self, set="train", channels="multi"):
+        if set == "train":
+            input_val, target, days = self.next_batch(batch_size="all", set="train")
+        else:
+            input_val, target, days = self.next_batch(set="test")
+        input_sequence, target_sequence, days_sequence = [], [], []
+        for i in range(input_val.shape[0] - self.sequence_size - 1):
+            if channels == "multi":
+                sequence_sample = np.concatenate([input_val[i:i+self.sequence_size, :],
+                                                  target[i:i+self.sequence_size][:, np.newaxis]], axis=1)
+            else:
+                sequence_sample = target[i:i+self.sequence_size]
+            input_sequence.append(sequence_sample[np.newaxis, :])
+            target_sequence.append(target[i+self.sequence_size])
+            days_sequence.append(days[i:i+self.sequence_size+1][np.newaxis, :])
+        input_sequence = np.concatenate(input_sequence, axis=0)
+        target_sequence = np.array(target_sequence)
+        days_sequence = np.concatenate(days_sequence, axis=0)
+        return input_sequence, target_sequence, days_sequence
 
 
 if __name__ == "__main__":
@@ -164,6 +182,7 @@ if __name__ == "__main__":
     database = DissolvedOxygenDatabase(database_path=path,
                                        sequence_size=3,
                                        train_prop=train_prop,
+                                       sequence_batch_size=50,
                                        start_date=first_day)
 
     database.plot_database()
@@ -188,3 +207,12 @@ if __name__ == "__main__":
         batch, target, days = database.next_batch(batch_size=50, set="train")
         print("batch_shape: "+str(batch.shape))
         print("target_shape:"+str(target.shape))
+
+    input_sequence, target_sequence, days_sequence = database.data2sequences(channels="single")
+    print(input_sequence.shape)
+    print(target_sequence.shape)
+    print(days_sequence.shape)
+
+    print(input_sequence[:3,...])
+    print(target_sequence[:3])
+    print(days_sequence[:3, :])

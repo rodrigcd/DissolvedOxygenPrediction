@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
+from OX_database import DissolvedOxygenDatabase
 from tensorflow.python.framework import dtypes
 from tensorflow.contrib import learn
 
@@ -16,7 +17,7 @@ class LstmLayer(object):
 
         with tf.variable_scope(layer_name):
             self.lstm = tf.nn.rnn_cell.BasicLSTMCell(hidden_units)
-            self.state = self.lstm.zero_state(input_tensor.get_shape()[0], dtype='float32')
+            self.state = self.lstm.zero_state(tf.shape(input_tensor)[0], dtype='float32')
             self.output_tensor, self.state = self.lstm(self.input_tensor, self.state)
 
 
@@ -31,8 +32,8 @@ class RecurrentLayer(object):
 
         with tf.variable_scope(layer_name):
             self.recurrent_layer = tf.nn.rnn_cell.BasicRNNCell(hidden_units)
-            self.state = self.recurrent_layer.zero_state(input_tensor.get_shape()[0], dtype='float32')
-            self.output_tensor, self.state = self.lstm(self.input_tensor, self.state)
+            self.state = self.recurrent_layer.zero_state(tf.shape(input_tensor)[0], dtype='float32')
+            self.output_tensor, self.state = self.recurrent_layer(self.input_tensor, self.state)
 
 
 class FullyConnectedLayer(object):
@@ -49,7 +50,28 @@ class FullyConnectedLayer(object):
             self.biases = tf.get_variable("biases", [self.weights_shape[1]],
                                           initializer=tf.constant_initializer(0.0))
             self.mult_out = tf.matmul(self.input_tensor, self.weights)
-            self.output_tensor = tf.nn.sigmoid(self.mult_out + self.biases)
+            self.output_tensor = self.mult_out + self.biases
+
+
+def seq2batches(input_seq, target_seq, days_seq, batch_size = 50):
+    batch = []
+    target = []
+    days = []
+    batch_index = 0
+    break_state = False
+    while True:
+        start = batch_index*batch_size
+        end = (batch_index + 1)*batch_size
+        if end >= input_seq.shape[0]:
+            end = input_seq.shape[0]
+            break_state = True
+        batch.append(input_seq[start:end, ...])
+        target.append(target_seq[start:end])
+        days.append(days_seq[start:end])
+        if break_state:
+            break
+        batch_index += 1
+    return batch, target, days
 
 
 class ForecastingNetwork(object):
@@ -58,8 +80,15 @@ class ForecastingNetwork(object):
     def __init__(self, **kwargs):
         # TODO: Get performance and stuffs
         self.sequence_length = kwargs["sequence_length"]
-
-        self.database = []
+        self.database = kwargs["database"]
+        self.batch_size = 50
+        self.train_seq, self.train_target, self.train_days = database.data2sequences(set="train")
+        self.test_seq, self.test_target, self.test_days = database.data2sequences(set="test")
+        self.input_batch, self.target_batch, self.days_batch = seq2batches(self.train_seq,
+                                                                           self.train_target,
+                                                                           self.train_days,
+                                                                           self.batch_size)
+        self.train_batch_count = 0
         self.sess = tf.Session()
         self.build_model()
         self.init_op = tf.global_variables_initializer()
@@ -73,18 +102,21 @@ class ForecastingNetwork(object):
 
     def build_model(self):
 
-        self.model_input = tf.placeholder(tf.float32)
+        self.model_input = tf.placeholder(tf.float32, shape=(50, self.sequence_length, 4))
         self.target = tf.placeholder(tf.float32)
         self.keep_prob = tf.placeholder(tf.float32)
+        self.diff_days = tf.placeholder(tf.float32)
 
-        self.lstm_layer_1 = RecurrentLayer(input_tensor=self.model_input,
-                                           hidden_units=5,
-                                           time_steps=5,
-                                           layer_name="lstm_layer1")
+        self.recurrent_layer_1 = RecurrentLayer(input_tensor=self.model_input,
+                                                hidden_units=5,
+                                                time_steps=5,
+                                                layer_name="recurrent_layer1")
 
-        self.fc_layer_2 = FullyConnectedLayer(input_tensor=self.lstm_layer_1.output_tensor,
-                                             weights_shape=[5, 1],
-                                             layer_name="fc_layer2")
+        self.fc_layer_2_input = tf.concat([self.recurrent_layer_1.output_tensor, self.diff_days], 1)
+
+        self.fc_layer_2 = FullyConnectedLayer(input_tensor=self.fc_layer_2_input,
+                                              weights_shape=[5+3, 1],
+                                              layer_name="fc_layer2")
 
         self.model_output = self.fc_layer_2.output_tensor
 
@@ -102,17 +134,20 @@ class ForecastingNetwork(object):
         #test_accuracy = list()
 
         for iteration in range(n_iterations):
-            data, labels = self.database.next_batch()
+            input_data, target, days = self.next_batch()
+
             _ = self.sess.run((train_step),feed_dict={
-                self.model_input: data,
-                self.target: labels,
+                self.model_input: input_data,
+                self.target: target,
+                self.diff_days: np.diff(days, axis=1),
                 self.keep_prob: 0.5
             })
-            if iteration%50 == 0:
+            if iteration%1 == 0:
                 train_accuracy = self.accuracy.eval(
                     feed_dict={
-                        self.model_input: data,
-                        self.target: labels,
+                        self.model_input: input_data,
+                        self.target: target,
+                        self.diff_days: np.diff(days, axis=1),
                         self.keep_prob: 0.5# to be fair
                         }, session=self.sess
                     )
@@ -148,3 +183,29 @@ class ForecastingNetwork(object):
             }, session=self.sess
         )
         return output
+
+    def next_batch(self):
+        batch = self.input_batch[self.train_batch_count]
+        target = self.target_batch[self.train_batch_count]
+        days = self.days_batch[self.train_batch_count]
+        self.train_batch_count += 1
+        if self.train_batch_count >= len(self.input_batch)-1:
+            self.train_batch_count = 0
+        return batch, target, days
+
+if __name__ == "__main__":
+
+    path = "/home/tesla/rodrigo/machine_learning_prob/DissolvedOxygenPrediction/database/"
+    sequence_size = 3
+    train_prop = 0.75
+    first_day = [2007, 7, 1]
+    database = DissolvedOxygenDatabase(database_path=path,
+                                       sequence_size=3,
+                                       train_prop=train_prop,
+                                       sequence_batch_size=50,
+                                       start_date=first_day)
+
+    forecasting_network = ForecastingNetwork(sequence_length=3,
+                                             database=database)
+
+    forecasting_network.train_iterations(50)
