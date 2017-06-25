@@ -32,7 +32,7 @@ class RecurrentLayer(object):
 
         with tf.variable_scope(layer_name):
             self.recurrent_layer = tf.nn.rnn_cell.BasicRNNCell(hidden_units)
-            self.state = self.recurrent_layer.zero_state(tf.shape(input_tensor)[0], dtype='float32')
+            self.state = self.recurrent_layer.zero_state(50, dtype='float32')
             self.output_tensor, self.state = self.recurrent_layer(self.input_tensor, self.state)
 
 
@@ -195,7 +195,7 @@ class ForecastingNetwork(object):
 
 if __name__ == "__main__":
 
-    path = "/home/tesla/rodrigo/machine_learning_prob/DissolvedOxygenPrediction/database/"
+    path = "/home/rodrigo/ml_prob/DissolvedOxygenPrediction/database/"
     sequence_size = 3
     train_prop = 0.75
     first_day = [2007, 7, 1]
