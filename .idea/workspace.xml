@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92ad81e5-d334-481e-b6f8-27911375b442" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/DissolvedOxygenPrediction.iml" afterPath="$PROJECT_DIR$/.idea/DissolvedOxygenPrediction.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NeuralNetworkModels.py" afterPath="$PROJECT_DIR$/NeuralNetworkModels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaussian_process_forecasting.py" afterPath="$PROJECT_DIR$/gaussian_process_forecasting.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm_test_results.png" afterPath="$PROJECT_DIR$/svm_test_results.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm_train_results.png" afterPath="$PROJECT_DIR$/svm_train_results.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaussian_process-pygps.ipynb" afterPath="$PROJECT_DIR$/gaussian_process-pygps.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaussian_process.ipynb" afterPath="$PROJECT_DIR$/gaussian_process.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +23,7 @@
       <file leaf-file-name="OX_database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OX_database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="3600">
               <caret line="184" column="39" lean-forward="false" selection-start-line="184" selection-start-column="39" selection-end-line="184" selection-end-column="62" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -33,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="svm_prediction.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="svm_prediction.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/svm_prediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="139">
+              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="81" selection-end-column="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -48,18 +47,9 @@
       <file leaf-file-name="gaussian_process_forecasting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gaussian_process_forecasting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="68" />
+            <state relative-caret-position="580">
+              <caret line="215" column="35" lean-forward="false" selection-start-line="215" selection-start-column="35" selection-end-line="215" selection-end-column="35" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gaussian_process.ipynb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gaussian_process.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="9" />
             </state>
           </provider>
         </entry>
@@ -71,6 +61,10 @@
               <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+                <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+                <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+                <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+                <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
               </folding>
             </state>
           </provider>
@@ -96,16 +90,16 @@
         <option value="$PROJECT_DIR$/svm_prediction.py" />
         <option value="$PROJECT_DIR$/OX_database.py" />
         <option value="$PROJECT_DIR$/NeuralNetworkModels.py" />
-        <option value="$PROJECT_DIR$/gaussian_process_forecasting.py" />
         <option value="$PROJECT_DIR$/gaussian_process.ipynb" />
+        <option value="$PROJECT_DIR$/gaussian_process_forecasting.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="63" />
-    <option name="y" value="-4" />
-    <option name="width" value="1303" />
-    <option name="height" value="772" />
+    <option name="x" value="1428" />
+    <option name="y" value="-11" />
+    <option name="width" value="1305" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -122,7 +116,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -137,6 +130,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -270,12 +264,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="63" y="-4" width="1303" height="772" extended-state="6" />
+    <frame x="1428" y="-11" width="1305" height="780" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12049118" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23467863" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18535127" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -289,6 +283,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -300,6 +295,55 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/OX_database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3600">
+          <caret line="184" column="39" lean-forward="false" selection-start-line="184" selection-start-column="39" selection-end-line="184" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/svm_prediction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaussian_process_forecasting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetworkModels.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaussian_process.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="-1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/OX_database.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4060">
@@ -316,6 +360,10 @@
           <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
           </folding>
         </state>
       </provider>
@@ -336,6 +384,10 @@
           <caret line="34" column="77" lean-forward="true" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="77" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
           </folding>
         </state>
       </provider>
@@ -356,6 +408,10 @@
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
           </folding>
         </state>
       </provider>
@@ -383,6 +439,10 @@
           <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
           </folding>
         </state>
       </provider>
@@ -403,6 +463,10 @@
           <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
           </folding>
         </state>
       </provider>
@@ -429,19 +493,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNetworkModels.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OX_database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="3600">
           <caret line="184" column="39" lean-forward="false" selection-start-line="184" selection-start-column="39" selection-end-line="184" selection-end-column="62" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -449,28 +503,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/svm_prediction.py">
+    <entry file="file://$PROJECT_DIR$/gaussian_process.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetworkModels.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1498435494298" expanded="true" signature="825:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="935:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="1137:1179" ph="..." />
+            <marker date="1498435494298" expanded="true" signature="7717:8337" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gaussian_process_forecasting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="68" />
+        <state relative-caret-position="580">
+          <caret line="215" column="35" lean-forward="false" selection-start-line="215" selection-start-column="35" selection-end-line="215" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gaussian_process.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="9" />
+    <entry file="file://$PROJECT_DIR$/svm_prediction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="81" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
