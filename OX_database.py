@@ -209,10 +209,5 @@ if __name__ == "__main__":
         print("target_shape:"+str(target.shape))
 
     input_sequence, target_sequence, days_sequence = database.data2sequences(channels="single")
-    print(input_sequence.shape)
-    print(target_sequence.shape)
-    print(days_sequence.shape)
 
-    print(input_sequence[:3,...])
-    print(target_sequence[:3])
-    print(days_sequence[:3, :])
+    
